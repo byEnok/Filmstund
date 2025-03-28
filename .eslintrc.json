@@ -1,0 +1,21 @@
+{
+  "extends": ["next/core-web-vitals", "prettier"],
+  "rules": {
+    "max-len": ["warn", { "code": 270 }],
+    "array-bracket-spacing": ["warn", "always"],
+    "space-in-parens": ["warn", "always"],
+    "prefer-template": ["warn"],
+    "prefer-object-has-own": ["warn"],
+    "prefer-destructuring": [
+      "warn",
+      {
+        "array": true,
+        "object": true
+      }
+    ],
+    "sort-vars": ["warn"],
+    "require-await": ["warn"]
+  }
+}
+
+

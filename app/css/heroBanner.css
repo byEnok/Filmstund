@@ -1,0 +1,20 @@
+.mask-left {
+  -webkit-mask-image: radial-gradient(circle at right, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0) 98%);
+  mask-image: radial-gradient(circle at right, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0) 98%);
+}
+
+.mask-right {
+  -webkit-mask-image: radial-gradient(circle at left, rgb(0, 0, 0, 1) 65%, rgba(244, 241, 241, 0) 98%);
+  mask-image: radial-gradient(circle at left, rgb(0, 0, 0, 1) 65%, rgba(236, 233, 233, 0) 98%);
+}
+
+.middle-blend {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* background: linear-gradient(to right, transparent 20%, rgba(0, 0, 0, 0.6) 50%, transparent 80%); */
+  z-index: 10; /* Ensure it's above the images */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 35%, /* Darker fade in */ rgba(0, 0, 0, 0.6) 50%, /* Mid fade */ rgba(0, 0, 0, 0.8) 65% /* Darker fade out */);
+  pointer-events: none; /* Prevents it from blocking interactions */
+}

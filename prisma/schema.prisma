@@ -1,0 +1,121 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id                String             @id
+  name              String?
+  userName          String?
+  password          String?           // null if using Magic Link  
+  email             String
+  emailVerified     Boolean
+  image             String?
+  createdAt         DateTime
+  updatedAt         DateTime          @updatedAt
+  sessions          Session[]
+  accounts          Account[]
+  folders           Folder[]
+  folderMemberships FolderMember[]    // Folders access shared with this user
+
+  username String?
+
+  @@unique([email, userName])
+  @@map("user")
+}
+
+model Session {
+  id            String                 @id
+  expiresAt     DateTime
+  token         String
+  createdAt     DateTime
+  updatedAt     DateTime
+  ipAddress     String?
+  userAgent     String?
+  userId        String
+  tmdbSessionId String?                // TMDB session ID for tracking external sessions
+  user          User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+model Folder {
+  id            String            @id @default(cuid())
+  name          String            // Folder name
+  color         String?           // ✅ Optional color for UI purposes
+  isPublic      Boolean           @default(false) // Visibility setting
+  pinned        Boolean           @default(false) // ✅ Pin favorite folders
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  userId        String
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movies        Movie[]           // List of movie suggestions within this folder
+  folderMembers FolderMember[]    // Users with access to this folder
+
+  @@map("folder")
+}
+
+model FolderMember {
+  id       String     @id @default(cuid())
+  folderId String
+  userId   String
+  sharedAt DateTime   @default(now()) // Timestamp when access was given
+  status    String     @default("pending") // ✅ "pending", "accepted"
+  acceptedAt DateTime?  // ✅ Track when the invite was accepted
+  role     String     @default("viewer") // Could be "viewer" or "editor"
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  folder   Folder     @relation(fields: [folderId], references: [id], onDelete: Cascade)
+
+  @@map("folder_access")
+}
+
+model Movie {
+  movieId  Int        @unique        // TMDB Movie ID
+  addedAt  DateTime   @default(now())
+  folderId String
+  folder   Folder     @relation(fields: [folderId], references: [id], onDelete: Cascade)
+
+  @@map("movie")
+}
