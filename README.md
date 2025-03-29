@@ -10,7 +10,7 @@
 -->
 
 <!-- [![Contributors][contributors-shield]][contributors-url] -->
-<center>
+<div align="center">
 
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -19,7 +19,7 @@
 
 <!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
-</center>
+</div>
 
 <br />
 
