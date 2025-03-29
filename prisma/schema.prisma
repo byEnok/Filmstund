@@ -18,7 +18,7 @@ model User {
   id                String             @id
   name              String?
   userName          String?
-  password          String?           // null if using Magic Link  
+  password          String?                             // null if using Magic Link  
   email             String
   emailVerified     Boolean
   image             String?
@@ -27,7 +27,7 @@ model User {
   sessions          Session[]
   accounts          Account[]
   folders           Folder[]
-  folderMemberships FolderMember[]    // Folders access shared with this user
+  folderMemberships FolderMember[]                      // Folders access shared with this user
 
   username String?
 
@@ -44,7 +44,7 @@ model Session {
   ipAddress     String?
   userAgent     String?
   userId        String
-  tmdbSessionId String?                // TMDB session ID for tracking external sessions
+  tmdbSessionId String?                                // TMDB session ID for tracking external sessions
   user          User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([token])
@@ -83,16 +83,16 @@ model Verification {
 
 model Folder {
   id            String            @id @default(cuid())
-  name          String            // Folder name
-  color         String?           // ✅ Optional color for UI purposes
-  isPublic      Boolean           @default(false) // Visibility setting
-  pinned        Boolean           @default(false) // ✅ Pin favorite folders
+  name          String                                 // Folder name
+  color         String?                                // ✅ Optional color for UI purposes
+  isPublic      Boolean           @default(false)      // Visibility setting
+  pinned        Boolean           @default(false)      // ✅ Pin favorite folders
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
   userId        String
   user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  movies        Movie[]           // List of movie suggestions within this folder
-  folderMembers FolderMember[]    // Users with access to this folder
+  movies        Movie[]                                // List of movie suggestions within this folder
+  folderMembers FolderMember[]                         // Users with access to this folder
 
   @@map("folder")
 }
@@ -101,10 +101,10 @@ model FolderMember {
   id       String     @id @default(cuid())
   folderId String
   userId   String
-  sharedAt DateTime   @default(now()) // Timestamp when access was given
-  status    String     @default("pending") // ✅ "pending", "accepted"
-  acceptedAt DateTime?  // ✅ Track when the invite was accepted
-  role     String     @default("viewer") // Could be "viewer" or "editor"
+  sharedAt DateTime   @default(now())                  // Timestamp when access was given
+  status    String     @default("pending")             // ✅ "pending", "accepted"
+  acceptedAt DateTime?                                 // ✅ Track when the invite was accepted
+  role     String     @default("viewer")               // Could be "viewer" or "editor"
   user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   folder   Folder     @relation(fields: [folderId], references: [id], onDelete: Cascade)
 
@@ -112,7 +112,7 @@ model FolderMember {
 }
 
 model Movie {
-  movieId  Int        @unique        // TMDB Movie ID
+  movieId  Int        @unique                          // TMDB Movie ID
   addedAt  DateTime   @default(now())
   folderId String
   folder   Folder     @relation(fields: [folderId], references: [id], onDelete: Cascade)

@@ -13,6 +13,9 @@
 /.next/
 /out/
 
+# Folders
+/globalComponents/OldComponents/
+
 # production
 /build
 
