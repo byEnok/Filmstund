@@ -86,17 +86,21 @@ Filmstund er laget for enkel deling av filmanbefalinger og for å gi brukere ove
 - [![Supabase][Supabase]][Supabase-url]
 - [![🔒 Better-Auth](https://img.shields.io/badge/🔒%20Better--Auth-000000?style=for-the-badge&logoColor=white)](https://www.better-auth.com/)
 <p align="right">(<a href="#readme-top">Til toppen</a>)</p>
-<!-- - **TMDB API**
-  For tilgang til all film- og brukerdata, som "skal se"-lister, vurderinger osv.
+
+
+<!--
+- **TMDB API** 
+  For tilgang til all film- og brukerdata, som "skal se"-lister, vurderinger osv
 
 - **Next.js**
-  For skalerbare prosjekter med enkel routing, server-side logikk og SEO.
+  For skalerbare prosjekter med enkel routing, server-side logikk og SEO
 
 - **Tailwind CSS**
   Brukes for effektiv og responsiv styling
 
 - **PostgreSQL via Prisma**
-  Enkel databasehåndtering og kraftig ORM for skalering og relasjoner. -->
+  Enkel databasehåndtering og kraftig ORM for skalering og relasjoner
+  -->
 
 &nbsp;
 
@@ -108,13 +112,10 @@ Under aktiv utvikling. Live Demo kommer snart.
 
 ## Skjermbilder
 
-<!-- ### - Populære Filmer -->
+### - Populære Filmer
+![filmstund](https://github.com/user-attachments/assets/841ff48b-816a-4925-a28e-55204cf5b8b2)
 
-Kommer Snart..
-
-<!-- ### - Filmliste og kategorier
-
-Kommer Snart.. -->
+<!-- ### - Filmliste og kategorier -->
 
 &nbsp;
 
@@ -143,6 +144,7 @@ Kommer Snart.. -->
 &nbsp;
 
 <p align="right">(<a href="#readme-top">Til toppen</a>)</p>
+
 ## Bidrag
 
 Bidrag er hjertelig velkommen! Hvis du har forslag eller forbedringer, kan du gjerne opprette en issue eller sende inn en pull request.
